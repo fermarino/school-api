@@ -1,7 +1,6 @@
 package com.example.schoolapi.model;
 
 import jakarta.persistence.*;
-
 import java.util.List;
 
 @Entity
@@ -19,7 +18,11 @@ public class Course {
     @JoinColumn(name = "department_id")
     private Department department;
 
-    // Getters and Setters
+    @ManyToOne // Adicione esta anotação
+    @JoinColumn(name = "teacher_id") // Referência ao professor
+    private Teacher teacher; // Adicione esta propriedade
+
+    // Getters e Setters
     public Long getId() {
         return id;
     }
@@ -50,5 +53,13 @@ public class Course {
 
     public void setDepartment(Department department) {
         this.department = department;
+    }
+
+    public Teacher getTeacher() {
+        return teacher; // Adicione este getter
+    }
+
+    public void setTeacher(Teacher teacher) { // Adicione este setter
+        this.teacher = teacher;
     }
 }
