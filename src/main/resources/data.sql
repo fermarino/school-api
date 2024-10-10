@@ -1,0 +1,10 @@
+INSERT INTO departments (name) VALUES ('Computer Science');
+INSERT INTO departments (name) VALUES ('Mathematics');
+INSERT INTO teachers (name) VALUES ('Alice Smith');
+INSERT INTO teachers (name) VALUES ('Bob Johnson');
+INSERT INTO students (name) VALUES ('John Doe');
+INSERT INTO students (name) VALUES ('Jane Doe');
+INSERT INTO courses (name, department_id) VALUES ('Data Structures', 1);
+INSERT INTO courses (name, department_id) VALUES ('Calculus', 2);
+INSERT INTO enrollments (student_id, course_id) VALUES (1, 1);
+INSERT INTO enrollments (student_id, course_id) VALUES (2, 2);
