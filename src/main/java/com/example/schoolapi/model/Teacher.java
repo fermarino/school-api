@@ -14,7 +14,7 @@ public class Teacher {
     @OneToMany(mappedBy = "teacher")
     private List<Course> courses;
 
-    // Getters and Setters
+    // Getters e Setters
     public Long getId() {
         return id;
     }
