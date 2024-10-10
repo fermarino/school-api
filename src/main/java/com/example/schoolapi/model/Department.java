@@ -1,5 +1,7 @@
 package com.example.schoolapi.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -12,10 +14,11 @@ public class Department {
     private Long id;
     private String name;
 
-    @OneToMany(mappedBy = "department")
+    @OneToMany(mappedBy = "department", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Course> courses;
 
-    // Getters and Setters
+    // Getters e Setters
     public Long getId() {
         return id;
     }

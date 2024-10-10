@@ -1,5 +1,6 @@
 package com.example.schoolapi.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -11,13 +12,15 @@ public class Enrollment {
 
     @ManyToOne
     @JoinColumn(name = "student_id")
+    @JsonBackReference
     private Student student;
 
     @ManyToOne
     @JoinColumn(name = "course_id")
+    @JsonBackReference
     private Course course;
 
-    // Getters and Setters
+    // Getters e Setters
     public Long getId() {
         return id;
     }

@@ -11,7 +11,7 @@ public class Library {
     private String name;
     private String location;
 
-    // Getters and Setters
+    // Getters e Setters
     public Long getId() {
         return id;
     }
