@@ -33,6 +33,7 @@ public class StudentController {
     @PutMapping("/{id}")
     public ResponseEntity<Student> updateStudent(@PathVariable Long id, @RequestBody Student studentDetails) {
         return studentRepository.findById(id).map(student -> {
+            // Atualiza todos os campos conforme necessário
             if (studentDetails.getName() != null) {
                 student.setName(studentDetails.getName());
             }
@@ -41,6 +42,9 @@ public class StudentController {
             }
             if (studentDetails.getPhoneNumber() != null) {
                 student.setPhoneNumber(studentDetails.getPhoneNumber());
+            }
+            if (studentDetails.getAddress() != null) {
+                student.setAddress(studentDetails.getAddress());
             }
             return ResponseEntity.ok(studentRepository.save(student));
         }).orElse(ResponseEntity.notFound().build());

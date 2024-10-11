@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/departments")
@@ -32,12 +33,24 @@ public class DepartmentController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Department> updateDepartment(@PathVariable Long id, @RequestBody Department departmentDetails) {
-        return departmentRepository.findById(id).map(department -> {
-            if (departmentDetails.getName() != null) {
-                department.setName(departmentDetails.getName());
-            }
-            return ResponseEntity.ok(departmentRepository.save(department));
-        }).orElse(ResponseEntity.notFound().build());
+        Optional<Department> existingDepartment = departmentRepository.findById(id);
+        if (!existingDepartment.isPresent()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        Department departmentToUpdate = existingDepartment.get();
+        // Atualiza os campos conforme necessário
+        if (departmentDetails.getName() != null) {
+            departmentToUpdate.setName(departmentDetails.getName());
+        }
+        if (departmentDetails.getHead() != null) {
+            departmentToUpdate.setHead(departmentDetails.getHead());
+        }
+        if (departmentDetails.getLocation() != null) {
+            departmentToUpdate.setLocation(departmentDetails.getLocation());
+        }
+        // Salva e retorna o departamento atualizado
+        return ResponseEntity.ok(departmentRepository.save(departmentToUpdate));
     }
 
     @DeleteMapping("/{id}")
