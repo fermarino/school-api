@@ -33,7 +33,9 @@ public class DepartmentController {
     @PutMapping("/{id}")
     public ResponseEntity<Department> updateDepartment(@PathVariable Long id, @RequestBody Department departmentDetails) {
         return departmentRepository.findById(id).map(department -> {
-            department.setName(departmentDetails.getName());
+            if (departmentDetails.getName() != null) {
+                department.setName(departmentDetails.getName());
+            }
             return ResponseEntity.ok(departmentRepository.save(department));
         }).orElse(ResponseEntity.notFound().build());
     }

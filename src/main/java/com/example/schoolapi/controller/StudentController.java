@@ -33,10 +33,15 @@ public class StudentController {
     @PutMapping("/{id}")
     public ResponseEntity<Student> updateStudent(@PathVariable Long id, @RequestBody Student studentDetails) {
         return studentRepository.findById(id).map(student -> {
-            student.setName(studentDetails.getName());
-            student.setEmail(studentDetails.getEmail());
-            student.setPhoneNumber(studentDetails.getPhoneNumber());
-            student.setAddress(studentDetails.getAddress());
+            if (studentDetails.getName() != null) {
+                student.setName(studentDetails.getName());
+            }
+            if (studentDetails.getEmail() != null) {
+                student.setEmail(studentDetails.getEmail());
+            }
+            if (studentDetails.getPhoneNumber() != null) {
+                student.setPhoneNumber(studentDetails.getPhoneNumber());
+            }
             return ResponseEntity.ok(studentRepository.save(student));
         }).orElse(ResponseEntity.notFound().build());
     }

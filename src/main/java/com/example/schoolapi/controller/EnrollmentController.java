@@ -33,8 +33,12 @@ public class EnrollmentController {
     @PutMapping("/{id}")
     public ResponseEntity<Enrollment> updateEnrollment(@PathVariable Long id, @RequestBody Enrollment enrollmentDetails) {
         return enrollmentRepository.findById(id).map(enrollment -> {
-            enrollment.setStatus(enrollmentDetails.getStatus());
-            enrollment.setSemester(enrollmentDetails.getSemester());
+            if (enrollmentDetails.getStatus() != null) {
+                enrollment.setStatus(enrollmentDetails.getStatus());
+            }
+            if (enrollmentDetails.getSemester() != null) {
+                enrollment.setSemester(enrollmentDetails.getSemester());
+            }
             return ResponseEntity.ok(enrollmentRepository.save(enrollment));
         }).orElse(ResponseEntity.notFound().build());
     }

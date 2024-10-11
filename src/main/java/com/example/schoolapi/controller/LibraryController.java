@@ -33,8 +33,12 @@ public class LibraryController {
     @PutMapping("/{id}")
     public ResponseEntity<Library> updateLibrary(@PathVariable Long id, @RequestBody Library libraryDetails) {
         return libraryRepository.findById(id).map(library -> {
-            library.setName(libraryDetails.getName());
-            library.setLocation(libraryDetails.getLocation());
+            if (libraryDetails.getName() != null) {
+                library.setName(libraryDetails.getName());
+            }
+            if (libraryDetails.getLocation() != null) {
+                library.setLocation(libraryDetails.getLocation());
+            }
             return ResponseEntity.ok(libraryRepository.save(library));
         }).orElse(ResponseEntity.notFound().build());
     }
