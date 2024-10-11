@@ -15,14 +15,14 @@ public class LibraryController {
     @Autowired
     private LibraryRepository libraryRepository;
 
-    @PostMapping
-    public Library createLibrary(@RequestBody Library library) {
-        return libraryRepository.save(library);
-    }
-
     @GetMapping
     public List<Library> getAllLibraries() {
         return libraryRepository.findAll();
+    }
+
+    @PostMapping
+    public Library createLibrary(@RequestBody Library library) {
+        return libraryRepository.save(library);
     }
 
     @GetMapping("/{id}")
@@ -34,6 +34,7 @@ public class LibraryController {
     public ResponseEntity<Library> updateLibrary(@PathVariable Long id, @RequestBody Library libraryDetails) {
         return libraryRepository.findById(id).map(library -> {
             library.setName(libraryDetails.getName());
+            library.setLocation(libraryDetails.getLocation());
             return ResponseEntity.ok(libraryRepository.save(library));
         }).orElse(ResponseEntity.notFound().build());
     }

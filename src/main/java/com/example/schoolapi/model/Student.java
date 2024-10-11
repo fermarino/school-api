@@ -12,10 +12,13 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    private String email; // Email do estudante
+    private String phoneNumber; // Número de telefone do estudante
+    private String address; // Endereço do estudante
 
     @OneToMany(mappedBy = "student", cascade = CascadeType.ALL)
     @JsonManagedReference
-    private List<Enrollment> enrollments;
+    private List<Enrollment> enrollments; // Um estudante pode ter várias matrículas
 
     // Getters e Setters
     public Long getId() {
@@ -32,6 +35,30 @@ public class Student {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public List<Enrollment> getEnrollments() {

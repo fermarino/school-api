@@ -15,14 +15,14 @@ public class CourseController {
     @Autowired
     private CourseRepository courseRepository;
 
-    @PostMapping
-    public Course createCourse(@RequestBody Course course) {
-        return courseRepository.save(course);
-    }
-
     @GetMapping
     public List<Course> getAllCourses() {
         return courseRepository.findAll();
+    }
+
+    @PostMapping
+    public Course createCourse(@RequestBody Course course) {
+        return courseRepository.save(course);
     }
 
     @GetMapping("/{id}")
@@ -34,7 +34,8 @@ public class CourseController {
     public ResponseEntity<Course> updateCourse(@PathVariable Long id, @RequestBody Course courseDetails) {
         return courseRepository.findById(id).map(course -> {
             course.setName(courseDetails.getName());
-            course.setDepartment(courseDetails.getDepartment());
+            course.setDuration(courseDetails.getDuration());
+            course.setDescription(courseDetails.getDescription());
             return ResponseEntity.ok(courseRepository.save(course));
         }).orElse(ResponseEntity.notFound().build());
     }
@@ -45,5 +46,15 @@ public class CourseController {
             courseRepository.delete(course);
             return ResponseEntity.ok().<Void>build();
         }).orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/department/{departmentId}")
+    public List<Course> getCoursesByDepartment(@PathVariable Long departmentId) {
+        return courseRepository.findByDepartmentId(departmentId);
+    }
+
+    @GetMapping("/teacher/{teacherId}")
+    public List<Course> getCoursesByTeacher(@PathVariable Long teacherId) {
+        return courseRepository.findByTeacherId(teacherId);
     }
 }

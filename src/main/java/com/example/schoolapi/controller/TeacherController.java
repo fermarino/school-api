@@ -15,14 +15,14 @@ public class TeacherController {
     @Autowired
     private TeacherRepository teacherRepository;
 
-    @PostMapping
-    public Teacher createTeacher(@RequestBody Teacher teacher) {
-        return teacherRepository.save(teacher);
-    }
-
     @GetMapping
     public List<Teacher> getAllTeachers() {
         return teacherRepository.findAll();
+    }
+
+    @PostMapping
+    public Teacher createTeacher(@RequestBody Teacher teacher) {
+        return teacherRepository.save(teacher);
     }
 
     @GetMapping("/{id}")
@@ -34,6 +34,9 @@ public class TeacherController {
     public ResponseEntity<Teacher> updateTeacher(@PathVariable Long id, @RequestBody Teacher teacherDetails) {
         return teacherRepository.findById(id).map(teacher -> {
             teacher.setName(teacherDetails.getName());
+            teacher.setEmail(teacherDetails.getEmail());
+            teacher.setPhoneNumber(teacherDetails.getPhoneNumber());
+            teacher.setOffice(teacherDetails.getOffice());
             return ResponseEntity.ok(teacherRepository.save(teacher));
         }).orElse(ResponseEntity.notFound().build());
     }

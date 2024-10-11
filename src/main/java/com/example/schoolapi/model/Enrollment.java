@@ -12,13 +12,14 @@ public class Enrollment {
 
     @ManyToOne
     @JoinColumn(name = "student_id")
-    @JsonBackReference
     private Student student;
 
     @ManyToOne
     @JoinColumn(name = "course_id")
-    @JsonBackReference
     private Course course;
+
+    private String semester; // Semestre da matrícula
+    private String status; // Status da matrícula (Ativa, Cancelada, etc.)
 
     // Getters e Setters
     public Long getId() {
@@ -43,5 +44,21 @@ public class Enrollment {
 
     public void setCourse(Course course) {
         this.course = course;
+    }
+
+    public String getSemester() {
+        return semester;
+    }
+
+    public void setSemester(String semester) {
+        this.semester = semester;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

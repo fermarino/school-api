@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface CourseRepository extends JpaRepository<Course, Long> {
-    // Função extra para buscar cursos por departamento
     List<Course> findByDepartmentId(Long departmentId);
+    List<Course> findByTeacherId(Long teacherId);
 }

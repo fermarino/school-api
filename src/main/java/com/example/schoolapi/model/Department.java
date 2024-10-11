@@ -13,6 +13,8 @@ public class Department {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    private String head;  // Chefe do departamento
+    private String location; // Localização do departamento
 
     @OneToMany(mappedBy = "department", cascade = CascadeType.ALL)
     @JsonManagedReference
@@ -33,6 +35,22 @@ public class Department {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getHead() {
+        return head;
+    }
+
+    public void setHead(String head) {
+        this.head = head;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public List<Course> getCourses() {

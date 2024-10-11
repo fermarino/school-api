@@ -12,20 +12,19 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private int duration; // Duração em horas
+    private String duration;  // Duração do curso
+    private String description; // Descrição do curso
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @JsonBackReference
     private List<Enrollment> enrollments;
 
     @ManyToOne
     @JoinColumn(name = "department_id")
-    @JsonBackReference
     private Department department;
 
     @ManyToOne
     @JoinColumn(name = "teacher_id")
-    @JsonBackReference
     private Teacher teacher;
 
     // Getters e Setters
@@ -45,12 +44,20 @@ public class Course {
         this.name = name;
     }
 
-    public int getDuration() {
-        return duration; // Getter para a duração
+    public String getDuration() {
+        return duration;
     }
 
-    public void setDuration(int duration) { // Setter para a duração
+    public void setDuration(String duration) {
         this.duration = duration;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public List<Enrollment> getEnrollments() {
