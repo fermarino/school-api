@@ -1,5 +1,6 @@
 package com.example.schoolapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.util.List;
@@ -11,12 +12,12 @@ public class Teacher {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String email; // E-mail do professor
-    private String phoneNumber; // Telefone do professor
-    private String office; // Escritório do professor
+    private String email;
+    private String phoneNumber;
+    private String office;
 
     @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @JsonIgnore  // Evita loop de referência
     private List<Course> courses;
 
     // Getters e Setters

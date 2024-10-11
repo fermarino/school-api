@@ -18,8 +18,8 @@ public class Enrollment {
     @JoinColumn(name = "course_id")
     private Course course;
 
-    private String semester; // Semestre da matrícula
-    private String status; // Status da matrícula (Ativa, Cancelada, etc.)
+    private String semester;
+    private String status;
 
     // Getters e Setters
     public Long getId() {

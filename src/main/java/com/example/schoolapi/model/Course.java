@@ -1,6 +1,7 @@
 package com.example.schoolapi.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import java.util.List;
@@ -16,7 +17,7 @@ public class Course {
     private String description; // Descrição do curso
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
-    @JsonBackReference
+    @JsonIgnore  // Evita loop de referência
     private List<Enrollment> enrollments;
 
     @ManyToOne

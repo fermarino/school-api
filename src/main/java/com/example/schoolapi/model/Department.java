@@ -1,6 +1,7 @@
 package com.example.schoolapi.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
@@ -17,7 +18,7 @@ public class Department {
     private String location; // Localização do departamento
 
     @OneToMany(mappedBy = "department", cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @JsonIgnore  // Evita loop de referência
     private List<Course> courses;
 
     // Getters e Setters
